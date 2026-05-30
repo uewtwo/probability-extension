@@ -13,7 +13,6 @@ DIST="dist"
 FILES=(
   manifest.json
   background.js
-  content.js
   popup.html popup.js popup.css
   options.html options.js options.css
   theme.css
@@ -48,7 +47,6 @@ if command -v node >/dev/null 2>&1; then
   for f in background.js popup.js options.js lib/*.js; do
     node --check --input-type=module < "$f" || { echo "ERROR: 構文エラー: $f" >&2; exit 1; }
   done
-  node --check content.js || { echo "ERROR: 構文エラー: content.js" >&2; exit 1; }
 else
   echo "  (node が無いため JS 構文チェックはスキップ)"
 fi

@@ -34,6 +34,9 @@
 2. 初回はモデルが未取得の場合があります。**設定 → AI モデル → モデルをダウンロード** で取得
 3. スコアがしきい値以上になると通知が出ます
 
+> **権限について**: 既定ではアイコンをクリックしたページのみを解析します（最小権限）。
+> **ページ読み込み時の自動判定**や**別ドメイン配信の画像判定**を使うには、**設定 → サイトへのアクセス → すべてのサイトで許可** を有効にしてください（任意・いつでも解除可）。
+
 ## 設定項目（オプション画面）
 
 | 項目 | 説明 | 既定値 |
@@ -69,9 +72,8 @@ make clean          # dist/ と zip を削除
 ## ファイル構成
 
 ```
-manifest.json        拡張定義(MV3, default_locale = en)
-background.js        service worker: テキスト/メディア判定・通知・バッジ
-content.js           本文テキストとメディア(画像/動画)の抽出
+manifest.json        拡張定義(MV3, default_locale = en, 最小権限 + 任意ホスト)
+background.js        service worker: 抽出(executeScript)・判定・通知・バッジ
 popup.html/js/css    メイン UI(テキスト/メディアのタブ)
 options.html/js/css  設定・モデルDL・通知テスト
 lib/settings.js      共有の設定・分類ロジック

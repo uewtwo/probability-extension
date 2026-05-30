@@ -313,12 +313,20 @@ async function init() {
   };
 
   const res = await send({ type: 'GET_RESULT', tabId: currentTabId });
-  const done = res && res.state && res.state.status === 'done';
+  const cur = res && res.state;
+  const done = cur && cur.status === 'done' && cur.url === tab.url;
   $('reanalyze').textContent = t(done ? 'btnReanalyze' : 'btnAnalyze');
 
-  // 通常のアイコンクリック起動時はメディア判定を開始する。
+  // 通常のアイコンクリック起動時(=ユーザー操作)に、未解析ならテキスト/メディア判定を開始する。
+  // activeTab により全サイト権限が無くても現在タブを解析できる。
   // アラートウィンドウ起動時は再解析ループを避けるため自動開始しない。
-  if (!isAlert) send({ type: 'ANALYZE_MEDIA', tabId: currentTabId });
+  if (!isAlert) {
+    if (!done && cur?.status !== 'analyzing') {
+      send({ type: 'ANALYZE', tabId: currentTabId });
+      if (!textTimer) textTimer = setInterval(refreshText, 700);
+    }
+    send({ type: 'ANALYZE_MEDIA', tabId: currentTabId });
+  }
 
   // 初期タブ(アラートが画像・動画起因なら media タブを表示)
   if (initialTab === 'media') {

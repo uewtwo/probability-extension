@@ -159,14 +159,16 @@ This extension has a single purpose: to estimate and display how likely the cont
 
 ### 権限の正当化 / Permission justifications
 
-> v1.1.0 で `activeTab` と `scripting` は不要なため削除済み（host 権限とコンテンツスクリプト静的宣言で代替）。要求している権限は以下の4つのみ。
+> 広範ホスト権限は審査で警告が出るため、`<all_urls>` を **`optional_host_permissions`（任意・実行時許可）** に変更。インストール時の権限は最小限。クリック起点の解析は `activeTab` で動作し、自動判定とクロスオリジン画像判定はユーザーが「全サイト許可」を与えたときのみ有効。
 
 | 権限 | 正当化文（英語でそのまま入力可） |
 | --- | --- |
-| Host permissions (`<all_urls>`) | The user can run AI-generation detection on any website they are viewing, so the extension needs to read the page's text and fetch its images/video frames on any host. The collected content is processed only by Chrome's on-device built-in AI and is never transmitted to any external server. |
-| `tabs` | Used to identify the active tab the user wants to analyze, read its URL to cache results per page, show the per-tab AI score on the toolbar badge, and focus the relevant tab when the user clicks a detection notification or pop-up. |
+| `activeTab` | When the user clicks the toolbar icon, this grants temporary access to the current tab so the extension can read its text and collect its images/video for AI-generation analysis. Access is limited to the tab the user explicitly acted on. |
+| `scripting` | Used to inject a small extraction routine into the active tab (on the user's action) to read the main text and collect image/video elements to be scored by the on-device AI. |
+| `tabs` | Used to identify the active tab to analyze, read its URL to cache results per page, show the per-tab AI score on the toolbar badge, and focus the relevant tab when the user clicks a detection notification or pop-up. |
 | `notifications` | Used to alert the user when a page's AI-generation score exceeds the threshold they configured. Notifications are used only for these detection alerts. |
 | `storage` | Used to save the user's own settings (threshold, language, toggles) and to cache each tab's analysis result in session storage so the pop-up can display it. No data is sent anywhere. |
+| Optional host permissions (`<all_urls>`) | Optional and requested at runtime only when the user opts in. It enables automatic detection on page load and the analysis of images served from other domains (CDNs). All content is processed only by Chrome's on-device built-in AI and is never transmitted externally. |
 | Remote code | **Not used.** Select "No, I am not using remote code." All logic ships inside the package; no external scripts, `eval`, or remotely hosted code are loaded or executed. |
 
 ### データ利用の申告 / Data disclosures（チェック項目）

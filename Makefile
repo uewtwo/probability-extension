@@ -19,7 +19,6 @@ check:
 	@python3 -c "import json; json.load(open('manifest.json')); print('manifest.json OK')"
 	@for f in _locales/*/messages.json; do python3 -c "import json,sys; json.load(open(sys.argv[1])); print(sys.argv[1], 'OK')" "$$f"; done
 	@for f in background.js popup.js options.js lib/*.js; do node --check --input-type=module < "$$f" && echo "$$f OK"; done
-	@node --check content.js && echo "content.js OK"
 
 clean:
 	@rm -rf dist *.zip

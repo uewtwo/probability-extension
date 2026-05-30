@@ -5,19 +5,12 @@
   "default_locale": "en",
   "description": "__MSG_appDesc__",
   "minimum_chrome_version": "138",
-  "permissions": ["storage", "notifications", "tabs"],
-  "host_permissions": ["<all_urls>"],
+  "permissions": ["storage", "notifications", "tabs", "activeTab", "scripting"],
+  "optional_host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js",
     "type": "module"
   },
-  "content_scripts": [
-    {
-      "matches": ["http://*/*", "https://*/*"],
-      "js": ["content.js"],
-      "run_at": "document_idle"
-    }
-  ],
   "action": {
     "default_popup": "popup.html",
     "default_title": "__MSG_appName__",

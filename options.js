@@ -70,6 +70,34 @@ async function onDownload() {
   }
 }
 
+// ---- サイトへのアクセス(任意ホスト権限) ----
+const ALL_URLS = { origins: ['<all_urls>'] };
+
+async function refreshAccess() {
+  const granted = await chrome.permissions.contains(ALL_URLS).catch(() => false);
+  const pill = $('accessStatus');
+  const btn = $('accessBtn');
+  pill.className = 'status-pill';
+  if (granted) {
+    pill.textContent = t('opt_access_granted'); pill.classList.add('ok');
+    btn.textContent = t('opt_access_revoke_btn');
+    btn.dataset.action = 'revoke';
+  } else {
+    pill.textContent = t('opt_access_notgranted'); pill.classList.add('warn');
+    btn.textContent = t('opt_access_grant_btn');
+    btn.dataset.action = 'grant';
+  }
+}
+
+async function onAccessClick() {
+  const action = $('accessBtn').dataset.action;
+  try {
+    if (action === 'grant') await chrome.permissions.request(ALL_URLS);
+    else await chrome.permissions.remove(ALL_URLS);
+  } catch (_) {}
+  await refreshAccess();
+}
+
 // ---- 通知テスト ----
 async function onTestNotification() {
   const result = $('testNotifResult');
@@ -114,8 +142,11 @@ function wire() {
     location.reload();
   });
 
+  $('accessBtn').addEventListener('click', onAccessClick);
   $('downloadBtn').addEventListener('click', onDownload);
   $('testNotifBtn').addEventListener('click', onTestNotification);
+  chrome.permissions.onAdded.addListener(refreshAccess);
+  chrome.permissions.onRemoved.addListener(refreshAccess);
 }
 
 (async function init() {
@@ -123,5 +154,6 @@ function wire() {
   localizeDom();
   await load();
   wire();
+  await refreshAccess();
   await refreshModelStatus();
 })();
