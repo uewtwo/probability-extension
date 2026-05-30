@@ -1,6 +1,6 @@
 // probability — popup ロジック(テキスト + メディア)
 import { classify } from './lib/settings.js';
-import { t, labelFor, localizeDom } from './lib/i18n.js';
+import { t, labelFor, localizeDom, loadI18n } from './lib/i18n.js';
 
 const CIRC = 2 * Math.PI * 52;
 let currentTabId = null;
@@ -252,6 +252,7 @@ async function refreshMedia() {
 
 // ---------- 初期化 ----------
 async function init() {
+  await loadI18n();
   localizeDom();
 
   // アラートウィンドウとして開かれた場合は対象タブ ID をクエリから受け取る

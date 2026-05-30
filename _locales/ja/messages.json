@@ -72,6 +72,10 @@
   "opt_btn_retry": { "message": "再試行" },
   "opt_download_failed": { "message": "ダウンロードに失敗しました: {error}" },
 
+  "opt_general_h": { "message": "一般" },
+  "opt_lang_label": { "message": "表示言語" },
+  "opt_lang_sub": { "message": "拡張機能の UI に使用する言語です。" },
+  "opt_lang_auto": { "message": "自動（ブラウザに従う）" },
   "opt_detect_h": { "message": "判定" },
   "opt_threshold_label": { "message": "通知のしきい値" },
   "opt_threshold_hint": { "message": "AI 生成スコアがこの値以上のとき「可能性が高い」と判定し、通知を出します。" },

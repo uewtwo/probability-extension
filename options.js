@@ -1,7 +1,7 @@
 // probability — 設定画面ロジック
 import { getSettings, setSettings } from './lib/settings.js';
 import { getImageAvailability, downloadModel } from './lib/detector.js';
-import { t, localizeDom } from './lib/i18n.js';
+import { t, localizeDom, loadI18n } from './lib/i18n.js';
 
 const $ = (id) => document.getElementById(id);
 let savedTimer = null;
@@ -85,6 +85,7 @@ async function onTestNotification() {
 // ---- 設定の読み書き ----
 async function load() {
   const s = await getSettings();
+  $('language').value = s.language;
   $('threshold').value = s.threshold;
   $('thresholdVal').textContent = s.threshold + '%';
   $('minChars').value = s.minChars;
@@ -107,11 +108,18 @@ function wire() {
     $(id).addEventListener('change', async (e) => { await setSettings({ [id]: e.target.checked }); flashSaved(); });
   }
 
+  // 言語変更: 保存後にページを再読み込みして全 UI を選択言語で再描画
+  $('language').addEventListener('change', async (e) => {
+    await setSettings({ language: e.target.value });
+    location.reload();
+  });
+
   $('downloadBtn').addEventListener('click', onDownload);
   $('testNotifBtn').addEventListener('click', onTestNotification);
 }
 
 (async function init() {
+  await loadI18n();
   localizeDom();
   await load();
   wire();

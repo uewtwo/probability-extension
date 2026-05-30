@@ -2,7 +2,7 @@
 // テキスト/メディアの AI 生成判定、通知、バッジ管理を行う。
 import { getSettings, classify } from './lib/settings.js';
 import { analyzeText, analyzeImage, getAvailability, getImageAvailability } from './lib/detector.js';
-import { t, labelFor } from './lib/i18n.js';
+import { t, labelFor, loadI18n } from './lib/i18n.js';
 
 const keyOf = (tabId) => `tab:${tabId}`;
 const mkeyOf = (tabId) => `media:${tabId}`;
@@ -65,6 +65,7 @@ function truncate(s, n) {
 
 async function notifyText(tabId, state, settings) {
   if (!settings.notify || state.score == null || state.score < settings.threshold) return;
+  await loadI18n();
   const c = classify(state.score, settings.threshold);
   fireNotification(`prob-${tabId}-${state.updatedAt}`, {
     type: 'basic',
@@ -80,6 +81,7 @@ async function notifyMedia(tabId, mstate, settings) {
   if (!settings.notify) return;
   const hits = (mstate.items || []).filter((i) => i.status === 'done' && i.score >= settings.threshold);
   if (hits.length === 0) return;
+  await loadI18n();
   fireNotification(`probmedia-${tabId}-${mstate.updatedAt}`, {
     type: 'basic',
     iconUrl: chrome.runtime.getURL('icons/icon128.png'),
@@ -310,6 +312,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     }
 
     if (msg.type === 'TEST_NOTIFICATION') {
+      await loadI18n();
       fireNotification(`probtest-${Date.now()}`, {
         type: 'basic',
         iconUrl: chrome.runtime.getURL('icons/icon128.png'),
