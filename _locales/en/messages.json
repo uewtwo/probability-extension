@@ -1,6 +1,6 @@
 {
   "appName": { "message": "probability" },
-  "appDesc": { "message": "Detects how likely page content (text, images, video) is AI-generated using Chrome's built-in AI, and notifies you above a threshold." },
+  "appDesc": { "message": "Estimate how likely a page's text, images, and video are AI-generated, on-device with Chrome's built-in AI." },
   "appTagline": { "message": "AI generation detector" },
   "settings": { "message": "Settings" },
 

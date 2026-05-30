@@ -260,6 +260,17 @@ async function init() {
   const isAlert = params.get('src') === 'alert';
   const initialTab = params.get('tab') === 'media' ? 'media' : 'text';
 
+  // アラートウィンドウとして開かれた場合、ESC で閉じられるようにする
+  if (isAlert) {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        chrome.windows.getCurrent()
+          .then((w) => chrome.windows.remove(w.id))
+          .catch(() => window.close());
+      }
+    });
+  }
+
   let tab = null;
   try {
     if (forcedTabId) tab = await chrome.tabs.get(Number(forcedTabId));
