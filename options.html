@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title data-i18n="opt_title">probability</title>
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="page-head">
+      <div class="brand">
+        <span class="dot">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M2 18 C7 18 7 6 12 6 C17 6 17 18 22 18" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>
+        </span>
+        <div>probability<br><small data-i18n="opt_brand_sub"></small></div>
+      </div>
+    </header>
+
+    <!-- モデル -->
+    <section class="card">
+      <h2 data-i18n="opt_model_h"></h2>
+      <p class="muted" data-i18n="opt_model_desc"></p>
+      <div class="status-row">
+        <span class="status-pill" id="modelStatus" data-i18n="opt_model_checking"></span>
+        <button id="downloadBtn" class="btn-primary" hidden></button>
+      </div>
+      <div class="progress" id="progressWrap" hidden>
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <p class="hint faint" id="modelHint"></p>
+    </section>
+
+    <!-- 判定 -->
+    <section class="card">
+      <h2 data-i18n="opt_detect_h"></h2>
+
+      <div class="field">
+        <div class="field-head">
+          <label for="threshold" data-i18n="opt_threshold_label"></label>
+          <span class="value-badge" id="thresholdVal">70%</span>
+        </div>
+        <input type="range" id="threshold" min="0" max="100" step="5" />
+        <p class="hint faint" data-i18n="opt_threshold_hint"></p>
+      </div>
+
+      <div class="toggle-row">
+        <div><div class="t-title" data-i18n="opt_autoAnalyze_t"></div><div class="t-sub faint" data-i18n="opt_autoAnalyze_s"></div></div>
+        <label class="switch"><input type="checkbox" id="autoAnalyze" /><span class="slider"></span></label>
+      </div>
+
+      <div class="toggle-row">
+        <div><div class="t-title" data-i18n="opt_media_t"></div><div class="t-sub faint" data-i18n="opt_media_s"></div></div>
+        <label class="switch"><input type="checkbox" id="analyzeMedia" /><span class="slider"></span></label>
+      </div>
+
+      <div class="toggle-row">
+        <div><div class="t-title" data-i18n="opt_notify_t"></div><div class="t-sub faint" data-i18n="opt_notify_s"></div></div>
+        <label class="switch"><input type="checkbox" id="notify" /><span class="slider"></span></label>
+      </div>
+
+      <div class="toggle-row">
+        <div><div class="t-title" data-i18n="opt_popupAlert_t"></div><div class="t-sub faint" data-i18n="opt_popupAlert_s"></div></div>
+        <label class="switch"><input type="checkbox" id="popupAlert" /><span class="slider"></span></label>
+      </div>
+
+      <div class="toggle-row">
+        <div><div class="t-title" data-i18n="opt_badge_t"></div><div class="t-sub faint" data-i18n="opt_badge_s"></div></div>
+        <label class="switch"><input type="checkbox" id="showBadge" /><span class="slider"></span></label>
+      </div>
+    </section>
+
+    <!-- 通知テスト -->
+    <section class="card">
+      <h2 data-i18n="opt_testNotif_h"></h2>
+      <div class="toggle-row" style="border-top:none; padding-top:4px;">
+        <div><div class="t-title" data-i18n="opt_testNotif_t"></div><div class="t-sub faint" data-i18n="opt_testNotif_s"></div></div>
+        <button id="testNotifBtn" class="btn-ghost" data-i18n="opt_testNotif_btn"></button>
+      </div>
+      <p class="hint faint" id="testNotifResult" hidden></p>
+    </section>
+
+    <!-- 詳細 -->
+    <section class="card">
+      <h2 data-i18n="opt_adv_h"></h2>
+      <div class="field">
+        <div class="field-head">
+          <label for="minChars" data-i18n="opt_minChars_label"></label>
+          <span class="value-badge" id="minCharsVal">280</span>
+        </div>
+        <input type="range" id="minChars" min="100" max="1000" step="20" />
+        <p class="hint faint" data-i18n="opt_minChars_hint"></p>
+      </div>
+    </section>
+
+    <p class="saved" id="saved" hidden data-i18n="opt_saved"></p>
+    <footer class="page-foot faint" data-i18n="opt_footer"></footer>
+  </div>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>

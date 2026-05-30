@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="dot">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M2 18 C7 18 7 6 12 6 C17 6 17 18 22 18" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </span>
+      <div>probability<br><small data-i18n="appTagline"></small></div>
+    </div>
+    <button id="settings" class="icon-btn" data-i18n-title="settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="text" data-i18n="tabText"></button>
+    <button class="tab" data-tab="media" data-i18n="tabMedia"></button>
+  </nav>
+
+  <!-- テキスト -->
+  <section class="panel" id="panel-text">
+    <div class="panel-body">
+      <div class="gauge-wrap" id="gaugeWrap" hidden>
+        <svg class="gauge" viewBox="0 0 120 120">
+          <circle class="track" cx="60" cy="60" r="52" />
+          <circle class="value" id="gaugeArc" cx="60" cy="60" r="52" />
+        </svg>
+        <div class="gauge-center">
+          <div class="score" id="scoreText">--</div>
+          <div class="score-unit" id="scoreUnit" data-i18n="scoreUnit"></div>
+        </div>
+      </div>
+      <div id="label" class="label" hidden></div>
+      <div id="summary" class="summary muted" hidden></div>
+      <ul id="reasons" class="reasons" hidden></ul>
+      <div id="message" class="state-box" hidden></div>
+    </div>
+    <div class="actions">
+      <button id="reanalyze" class="btn-primary" style="flex:1"></button>
+      <span id="meta" class="footer-meta faint"></span>
+    </div>
+  </section>
+
+  <!-- 画像・動画 -->
+  <section class="panel" id="panel-media" hidden>
+    <div class="panel-body">
+      <div id="mediaStatus" class="state-box" hidden></div>
+      <div id="mediaGrid" class="media-grid" hidden></div>
+    </div>
+    <div class="actions">
+      <button id="reanalyzeMedia" class="btn-primary" style="flex:1" data-i18n="media_rerun"></button>
+    </div>
+  </section>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

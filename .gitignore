@@ -1,0 +1,24 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Claude Code / agent working dir
+.claude/
+
+# Logs
+*.log
+
+# Node (将来ツールを足す場合用)
+node_modules/
+npm-debug.log*
+
+# パッケージ化した拡張・鍵
+*.zip
+*.crx
+*.pem
