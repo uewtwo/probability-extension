@@ -5,7 +5,7 @@
   "default_locale": "en",
   "description": "__MSG_appDesc__",
   "minimum_chrome_version": "138",
-  "permissions": ["storage", "notifications", "activeTab", "scripting", "tabs"],
+  "permissions": ["storage", "notifications", "tabs"],
   "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js",
