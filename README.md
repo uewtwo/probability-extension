@@ -53,6 +53,19 @@
    - Windows: 設定 → システム → 通知 → Google Chrome を許可 / 集中モードを解除
 3. それでも出ない場合は `chrome://settings/content/notifications` の設定を確認してください。
 
+## ビルド / ストア用パッケージ
+
+`manifest.json` をルートに置いた、Chrome ウェブストア入稿用 ZIP を `dist/` に生成します（JSON / JS の検証込み）。
+
+```sh
+make build          # または: npm run build / bash scripts/build.sh
+make icons          # アイコン(icons/*.png)を再生成
+make check          # JSON / JS の検証のみ
+make clean          # dist/ と zip を削除
+```
+
+ストア掲載文・権限の正当化・プライバシー申告は [STORE_LISTING.md](STORE_LISTING.md)、プライバシーポリシーは [PRIVACY.md](PRIVACY.md) を参照。
+
 ## ファイル構成
 
 ```

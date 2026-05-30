@@ -18,7 +18,8 @@ Thumbs.db
 node_modules/
 npm-debug.log*
 
-# パッケージ化した拡張・鍵
+# ビルド成果物・パッケージ化した拡張・鍵
+dist/
 *.zip
 *.crx
 *.pem

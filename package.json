@@ -1,0 +1,17 @@
+{
+  "name": "probability-extension",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Detect how likely page content (text, images, video) is AI-generated using Chrome's built-in AI.",
+  "license": "SEE LICENSE IN README",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uewtwo/probability-extension.git"
+  },
+  "scripts": {
+    "build": "bash scripts/build.sh",
+    "icons": "python3 gen_icons.py",
+    "check": "make check",
+    "clean": "rm -rf dist *.zip"
+  }
+}
